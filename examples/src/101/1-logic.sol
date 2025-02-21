@@ -32,8 +32,9 @@ contract Example1 is Ownable {
 			
 			if (accumulator < 1000) {
 				vaults[i].locked = true;
-				accumulator = 0; // <--- This line should be outside the if statement
-			}		
+				 // <--- This line should be outside the if statement
+			}
+			accumulator = 0;		
 		}
     }
 
