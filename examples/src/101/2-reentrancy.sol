@@ -18,11 +18,12 @@ contract Example2 {
 	function withdraw() external {		
 		// Checks!
 		require(balance[msg.sender] > 0, "Saldo cero!");	
-		// Interactions D: VULNERABLE!!
-		(bool success, ) = payable(msg.sender).call{value: balance[msg.sender]}("");
-		require(success, "Low level call failed");
+		uint256 amount = balance[msg.sender];
 		// Effects :(
-		balance[msg.sender] = 0;	
+		balance[msg.sender] = 0;
+		// Interactions D: VULNERABLE!!
+		(bool success, ) = payable(msg.sender).call{value: amount}("");
+		require(success, "Low level call failed");	
 	}
 	
 	
