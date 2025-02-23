@@ -37,7 +37,7 @@ contract Example6_1 is Ownable {
 
 	
 	///@notice This function resets the timestamp of the any user, which should be a privileged action
-	function resetTimestamp (address user) public {
+	function resetTimestamp (address user) public onlyOwner {
 		blockstamp[user] = 0;
 	}
 

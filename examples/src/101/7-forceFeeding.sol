@@ -29,11 +29,11 @@ contract Example7 {
 
 	function withdraw() external {		
 		// Consistency check...
-		assert(totalDeposit == address(this).balance); 	// Strict comparison of balance is vulnerable to force feeding Eth 
-		totalDeposit -= balance[msg.sender];
+		uint256 toWithdraw = balance[msg.sender];
+		require(toWithdraw > 0, "No balance to withdraw");
 
 		// Effects
-		uint256 toWithdraw = balance[msg.sender];
+		totalDeposit -= toWithdraw;
 		balance[msg.sender] = 0;	
 		
 		// Interactions
